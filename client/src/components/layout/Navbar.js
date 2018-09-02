@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import propTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { logoutUser } from '../../actions/authActions';
-import { clearCurrentProfile } from '../../actions/profileActions';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import propTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
+import { clearCurrentProfile } from "../../actions/profileActions";
 
 class Navbar extends Component {
-
   onLogoutClick(e) {
     e.preventDefault();
     this.props.clearCurrentProfile();
@@ -14,7 +13,6 @@ class Navbar extends Component {
   }
 
   render() {
-
     const { isAuthenticated, user } = this.props.auth;
 
     const authLinks = (
@@ -22,27 +20,31 @@ class Navbar extends Component {
         <li className="nav-item">
           <Link className="nav-link" to="/feed">
             New Feed
-        </Link>
+          </Link>
         </li>
 
         <li className="nav-item">
           <Link className="nav-link" to="/dashboard">
             Dashboard
-        </Link>
+          </Link>
         </li>
 
-
-
         <li className="nav-item">
-          <a href="" onClick={this.onLogoutClick.bind(this)} className="nav-link" >
-            <img className="rounded-circle" src={user.avatar} alt={user.name} style={{ width: '25px', marginRight: '5px' }} />
-            {' '}
+          <a
+            href=""
+            onClick={this.onLogoutClick.bind(this)}
+            className="nav-link"
+          >
+            <img
+              className="rounded-circle"
+              src={user.avatar}
+              alt={user.name}
+              style={{ width: "25px", marginRight: "5px" }}
+            />{" "}
             Logout
           </a>
         </li>
-
       </ul>
-
     );
 
     const guestLinks = (
@@ -50,22 +52,21 @@ class Navbar extends Component {
         <li className="nav-item">
           <Link className="nav-link" to="/register">
             Sign Up
-        </Link>
+          </Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/login">
             Login
-        </Link>
+          </Link>
         </li>
       </ul>
     );
-
 
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            mBlog
+            mConnect
           </Link>
           <button
             className="navbar-toggler"
@@ -80,13 +81,12 @@ class Navbar extends Component {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/profiles">
-                  {' '}
+                  {" "}
                   Members
                 </Link>
               </li>
             </ul>
             {isAuthenticated ? authLinks : guestLinks}
-
           </div>
         </div>
       </nav>
@@ -97,10 +97,13 @@ class Navbar extends Component {
 Navbar.propTypes = {
   logoutUser: propTypes.func.isRequired,
   auth: propTypes.object.isRequired
-}
+};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(Navbar);
+export default connect(
+  mapStateToProps,
+  { logoutUser, clearCurrentProfile }
+)(Navbar);
